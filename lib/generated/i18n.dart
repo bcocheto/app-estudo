@@ -17,247 +17,90 @@ class S implements WidgetsLocalizations {
   @override
   TextDirection get textDirection => TextDirection.ltr;
 
-  String get Like => "Like";
-  String get about => "About";
-  String get actionCancel => "Cancel";
-  String get actionConfirm => "Confirm";
-  String get appName => "Love Music";
+  String get Like => "Curtir";
+  String get about => "Sobre";
+  String get actionCancel => "Cancelar";
+  String get actionConfirm => "Confirmar";
+  String get appName => "Estrutura de Dados";
   String get appUpdateActionDownloadAgain => "Download";
-  String get appUpdateActionInstallApk => "Install";
-  String get appUpdateActionUpdate => "Update";
-  String get appUpdateCheckUpdate => "Check Update";
-  String get appUpdateDoubleBackTips => "Press back again, cancel download";
-  String get appUpdateDownloadCanceled => "Download canceled";
-  String get appUpdateDownloadFailed => "Download failed";
+  String get appUpdateActionInstallApk => "Instalar";
+  String get appUpdateActionUpdate => "Atualizar";
+  String get appUpdateCheckUpdate => "Checar Atualizações";
+  String get appUpdateDoubleBackTips =>
+      "Pressione voltar novamente, cancelar download";
+  String get appUpdateDownloadCanceled => "Download cancelado";
+  String get appUpdateDownloadFailed => "Download falhou";
   String get appUpdateDownloading => "Downloading...";
-  String get appUpdateLeastVersion => "Least version now ";
+  String get appUpdateLeastVersion => "Nova Versão Agora... ";
   String get appUpdateReDownloadContent =>
-      "It has been detected that it has been downloaded, whether it is installed?";
-  String get appUpdateUpdate => "Version Update";
+      "Foi detectado que já foi baixado, baixar novamente?";
+  String get appUpdateUpdate => "Atualizar Versão";
   String get article_tag_top => "Top";
   String get autoBySystem => "Auto";
-  String get clear => "Clear";
-  String get close => "Close";
+  String get clear => "Limpar";
+  String get close => "Fechar";
   String get coin => "Coin";
-  String get collectionRemove => "Remove";
+  String get collectionRemove => "Remover";
   String get darkMode => "Dark Mode";
-  String get favourites => "Favorites";
-  String get feedback => "FeedBack";
-  String get fieldNotNull => "not empty";
-  String get fontKuaiLe => "ZCOOL KuaiLe";
-  String get githubIssue => "Can't find mail app,please github issues";
-  String get loadFailed => "Load failed,retry later";
-  String get logout => "Sign Out";
-  String get myFavourites => "My favourites";
-  String get needLogin => "Go to Sign In";
-  String get noAccount => "No Account ? ";
-  String get openBrowser => "Open Browser";
-  String get password => "Please input Password";
-  String get rate => "Rate";
-  String get rePassword => "Confirm Password";
-  String get refresh => "Refresh";
-  String get refreshTwoLevel => "release to enter second floor";
-  String get retry => "Retry";
-  String get searchHistory => "History";
-  String get searchHot => "Hot";
-  String get searchSuggest => "Track,album,artist,podcast";
-  String get searchShake => "Shake";
-  String get setting => "Setting";
-  String get settingFont => "System Font";
-  String get settingLanguage => "Language";
-  String get share => "Share";
-  String get signIn => "Sign In";
-  String get signIn3thd => "More";
-  String get welcome => "Welcome";
-  String get signUp => "Sign Up";
-  String get splashSkip => "Skip";
-  String get tabSearch => "Search";
-  String get searchResult => "Search Result:";
-  String get tabMusic => "Music";
-  String get tabFavorite => "Favorite";
-  String get tabUser => "Me";
-  String get theme => "Theme";
-  String get toSignIn => "Sign In";
-  String get albums => "Albums";
-  String get viewAll => "View All";
-  String get forYou => "For you";
-  String get toSignUp => "Sign Up";
-  String get twoPwdDifferent => "The two passwords differ";
-  String get unLike => "UnLike";
-  String get userName => "Please input Username";
-  String get viewStateButtonLogin => "Sign In";
-  String get viewStateButtonRefresh => "Refresh";
-  String get viewStateButtonRetry => "Retry";
-  String get viewStateMessageEmpty => "Nothing Found";
-  String get viewStateMessageError => "Load Failed";
-  String get viewStateMessageNetworkError => "Load Failed,Check network ";
-  String get viewStateMessageUnAuth => "Not sign in yet";
-  String get wechatAccount => "Wechat";
-  String appUpdateFoundNewVersion(String version) => "New version $version";
-}
-
-class $en extends S {
-  const $en();
-}
-
-class $pt_BR extends S {
-  const $pt_BR();
-
-  @override
-  TextDirection get textDirection => TextDirection.ltr;
-
-  @override
   String get favourites => "Favoritos";
-  @override
-  String get appUpdateLeastVersion => "Versão";
-  @override
-  String get twoPwdDifferent => "Senhas divergentes";
-  @override
-  String get viewStateButtonRetry => "Tentar novamente";
-  @override
-  String get about => "Sobre";
-  @override
+  String get feedback => "FeedBack";
+  String get fieldNotNull => "não está vazio";
+  String get fontKuaiLe => "ZCOOL KuaiLe";
+  String get githubIssue =>
+      "Não foi possível encontrar o aplicativo de e-mail. Problemas no github";
+  String get loadFailed => "Falha no carregamento, tente novamente mais tarde";
+  String get logout => "Logout";
+  String get myFavourites => "Meus Favoritos";
+  String get needLogin => "Ir para o Login";
+  String get noAccount => "Não tem conta ? ";
+  String get openBrowser => "Abrir Navegador";
+  String get password => "Por favor digite a senha";
+  String get rate => "Avaliar";
+  String get rePassword => "Confirmar a Senha";
+  String get refresh => "Recarregar";
+  String get refreshTwoLevel => "solte para entrar no segundo andar";
+  String get retry => "Tentar Novamente";
+  String get searchHistory => "Histórico";
+  String get searchHot => "Hot";
+  String get searchSuggest => "Pesquisar...";
+  String get searchShake => "Mexer";
+  String get setting => "Configurações";
+  String get settingFont => "Fonte do sistema";
+  String get settingLanguage => "Linguagem";
+  String get share => "Compartilhar";
+  String get signIn => "Fazer Login";
+  String get signIn3thd => "Mais";
+  String get welcome => "Bem vindo";
+  String get signUp => "Fazer Login";
+  String get splashSkip => "Próximo";
+  String get tabSearch => "Pesquisar";
+  String get searchResult => "Resultados da Busca:";
+  String get tabMusic => "Músicas";
+  String get tabFavorite => "Favoritos";
+  String get tabUser => "Perfil";
+  String get theme => "Tema";
+  String get toSignIn => "Entrar";
+  String get albums => "Categorias";
+  String get viewAll => "Ver Tudo";
+  String get forYou => "Pra você";
+  String get toSignUp => "Sign Up";
+  String get twoPwdDifferent => "As duas senhas não são iguais";
   String get unLike => "Descurtir";
-  @override
-  String get signUp => "Login";
-  @override
-  String get viewStateMessageEmpty => "Limpar";
-  @override
-  String get appUpdateActionInstallApk => "直接安装";
-  @override
-  String get viewStateMessageUnAuth => "未登录";
-  @override
-  String get setting => "设置";
-  @override
-  String get settingFont => "字体";
-  @override
-  String get feedback => "意见反馈";
-  @override
-  String get logout => "退出登录";
-  @override
-  String get password => "请输入密码";
-  @override
-  String get searchShake => "换一换";
-  @override
-  String get Like => "收藏";
-  @override
-  String get viewStateMessageNetworkError => "网络连接异常,请检查网络或稍后重试";
-  @override
-  String get appUpdateActionDownloadAgain => "重新下载";
-  @override
-  String get autoBySystem => "跟随系统";
-  @override
-  String get viewStateButtonRefresh => "刷新一下";
-  @override
-  String get appUpdateDoubleBackTips => "再次点击返回键,取消下载";
-  @override
-  String get loadFailed => "加载失败,请稍后重试";
-  @override
-  String get refreshTwoLevel => "欢迎光临,我的空中楼阁";
-  @override
-  String get article_tag_top => "置顶";
-  @override
-  String get appUpdateDownloadFailed => "下载失败";
-  @override
-  String get appUpdateReDownloadContent => "检测到本地已下载过该版本,是否直接安装?";
-  @override
-  String get noAccount => "还没账号? ";
-  @override
-  String get openBrowser => "浏览器打开";
-  @override
-  String get appUpdateActionUpdate => "更新";
-  @override
-  String get coin => "积分";
-  @override
-  String get splashSkip => "跳过";
-  @override
-  String get collectionRemove => "移除收藏";
-  @override
-  String get actionConfirm => "确认";
-  @override
-  String get fontKuaiLe => "快乐字体";
-  @override
-  String get appUpdateCheckUpdate => "检查更新";
-  @override
-  String get settingLanguage => "多语言";
-  @override
-  String get myFavourites => "我的收藏";
-  @override
-  String get signIn3thd => "第三方登录";
-  @override
-  String get welcome => "欢迎登录小寓优品";
-  @override
-  String get viewStateMessageError => "加载失败";
-  @override
-  String get rate => "评分";
-  @override
-  String get actionCancel => "取消";
-  @override
-  String get theme => "色彩主题";
-  @override
-  String get share => "分享";
-  @override
-  String get appUpdateUpdate => "版本更新";
-  @override
-  String get fieldNotNull => "不能为空";
-  @override
-  String get close => "关闭";
-  @override
-  String get retry => "重试";
-  @override
-  String get wechatAccount => "公众号";
-  @override
-  String get toSignUp => "去注册";
-  @override
-  String get appUpdateDownloading => "下载中,请稍后...";
-  @override
-  String get appName => "爱Music";
-  @override
-  String get tabUser => "我的";
-  @override
-  String get clear => "清空";
-  @override
-  String get needLogin => "请先登录";
-  @override
-  String get refresh => "刷新";
-  @override
-  String get toSignIn => "点我登录";
-  @override
-  String get albums => "歌集";
-  @override
-  String get viewAll => "查看所有";
-  @override
-  String get forYou => "推荐";
-  @override
-  String get userName => "请输入账户名";
-  @override
-  String get appUpdateDownloadCanceled => "下载已取消";
-  @override
-  String get tabSearch => "搜索";
-  @override
-  String get searchResult => "搜索结果：";
-  @override
-  String get tabMusic => "音乐";
-  @override
-  String get tabFavorite => "收藏";
-  @override
-  String get rePassword => "确认密码";
-  @override
-  String get signIn => "登录";
-  @override
-  String get githubIssue => "未找到邮件客户端,请前往github,提issue";
-  @override
-  String get viewStateButtonLogin => "登录";
-  @override
-  String get searchHot => "热门搜索";
-  @override
-  String get searchSuggest => "歌名 歌手名 专辑名";
-  @override
-  String get darkMode => "黑夜模式";
-  @override
-  String get searchHistory => "历史搜索";
-  @override
-  String appUpdateFoundNewVersion(String version) => "发现新版本$version,是否更新?";
+  String get userName => "Por favor, digite o nome de usuário";
+  String get viewStateButtonLogin => "Sign In";
+  String get viewStateButtonRefresh => "Recarregar";
+  String get viewStateButtonRetry => "Tentar novamente";
+  String get viewStateMessageEmpty => "Nada foi encontrado";
+  String get viewStateMessageError => "O Carregamento Falhou";
+  String get viewStateMessageNetworkError =>
+      "O Carregamento Falhou, Cheque sua conexão ";
+  String get viewStateMessageUnAuth => "Não está logado";
+  String get wechatAccount => "Wechat";
+  String appUpdateFoundNewVersion(String version) => "Nova versão $version";
+}
+
+class $pt_br extends S {
+  const $pt_br();
 }
 
 class GeneratedLocalizationsDelegate extends LocalizationsDelegate<S> {
@@ -265,8 +108,7 @@ class GeneratedLocalizationsDelegate extends LocalizationsDelegate<S> {
 
   List<Locale> get supportedLocales {
     return const <Locale>[
-      Locale("en", ""),
-      Locale("zh", "CN"),
+      Locale("pt", "BR"),
     ];
   }
 
@@ -293,11 +135,11 @@ class GeneratedLocalizationsDelegate extends LocalizationsDelegate<S> {
     final String lang = getLang(locale);
     if (lang != null) {
       switch (lang) {
-        case "en":
-          S.current = const $en();
+        case "pt_br":
+          S.current = const $pt_br();
           return SynchronousFuture<S>(S.current);
         case "pt_BR":
-          S.current = const $pt_BR();
+          S.current = const $pt_br();
           return SynchronousFuture<S>(S.current);
         default:
       }
