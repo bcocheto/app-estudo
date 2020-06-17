@@ -3,7 +3,6 @@ import 'dart:math';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:projeto_estrutura/config/storage_manager.dart';
-import 'package:projeto_estrutura/generated/i18n.dart';
 import 'package:projeto_estrutura/ui/helper/theme_helper.dart';
 
 //const Color(0xFF5394FF),
@@ -105,17 +104,6 @@ class ThemeModel with ChangeNotifier {
           .setBool(kThemeUserDarkMode, userDarkMode),
       StorageManager.sharedPreferences.setInt(kThemeColorIndex, index)
     ]);
-  }
-
-  static String fontName(index, context) {
-    switch (index) {
-      case 0:
-        return S.of(context).autoBySystem;
-      case 1:
-        return S.of(context).fontKuaiLe;
-      default:
-        return '';
-    }
   }
 
   static saveFontIndex(int index) async {
