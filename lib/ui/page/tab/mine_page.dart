@@ -78,23 +78,6 @@ class UserListWidget extends StatelessWidget {
                 }),
           ),
           SettingThemeWidget(),
-          ListTile(
-            title: Text(S.of(context).settingLanguage),
-            onTap: () {
-              var model = Provider.of<LocaleModel>(context);
-              model.switchLocale();
-            },
-            leading: Icon(
-              Icons.public,
-              color: iconColor,
-            ),
-            trailing: CupertinoSwitch(
-                activeColor: Theme.of(context).accentColor,
-                value: localModel.localeIndex == 0,
-                onChanged: (value) {
-                  localModel.switchLocale();
-                }),
-          ),
         ]),
       ),
     );
