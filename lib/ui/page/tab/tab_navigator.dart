@@ -6,7 +6,6 @@ import 'package:projeto_estrutura/generated/i18n.dart';
 import 'package:projeto_estrutura/model/download_model.dart';
 import 'package:projeto_estrutura/model/favorite_model.dart';
 import 'package:projeto_estrutura/provider/provider_widget.dart';
-import 'package:projeto_estrutura/ui/page/tab/favorite_page.dart';
 import 'package:projeto_estrutura/ui/page/tab/home_page.dart';
 import 'package:projeto_estrutura/ui/page/tab/mine_page.dart';
 import 'package:projeto_estrutura/ui/page/tab/music_page.dart';
@@ -24,8 +23,7 @@ class _TabNavigatorState extends State<TabNavigator> {
   List<Widget> pages = <Widget>[
     HomePage(),
     MusicPage(),
-    FavoritePage(),
-    MinePage()
+    MinePage(),
   ];
 
   @override
@@ -103,22 +101,6 @@ class _TabNavigatorState extends State<TabNavigator> {
               ),
               title: Text(
                 S.of(context).tabMusic,
-                style: TextStyle(color: Colors.white),
-              ),
-            ),
-            BubbleBottomBarItem(
-              backgroundColor: Theme.of(context).primaryColorDark,
-              icon: Icon(
-                Icons.favorite,
-                size: 25.0,
-              ),
-              activeIcon: Icon(
-                Icons.favorite,
-                size: 25.0,
-                color: Colors.white,
-              ),
-              title: Text(
-                S.of(context).tabFavorite,
                 style: TextStyle(color: Colors.white),
               ),
             ),
