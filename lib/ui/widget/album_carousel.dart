@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:projeto_estrutura/model/favorite_model.dart';
 import 'package:projeto_estrutura/model/song_model.dart';
 import 'package:projeto_estrutura/provider/provider_widget.dart';
-import 'package:projeto_estrutura/ui/page/player_page.dart';
+import 'package:projeto_estrutura/ui/page/tab/music_page.dart';
 import 'package:provider/provider.dart';
 
 class AlbumCarousel extends StatefulWidget {
@@ -124,9 +124,7 @@ class _AlbumCarouselState extends State<AlbumCarousel> {
                       Navigator.push(
                         context,
                         MaterialPageRoute(
-                          builder: (_) => PlayPage(
-                            nowPlay: true,
-                          ),
+                          builder: (_) => PlayPage(),
                         ),
                       );
                     }
