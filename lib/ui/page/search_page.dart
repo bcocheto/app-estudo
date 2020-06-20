@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:projeto_estrutura/generated/i18n.dart';
+import 'package:projeto_estrutura/ui/page/tab/music_page.dart';
 import 'package:projeto_estrutura/ui/widget/app_bar.dart';
 import 'package:projeto_estrutura/model/song_model.dart';
 import 'package:projeto_estrutura/provider/provider_widget.dart';
 import 'package:projeto_estrutura/provider/view_state_widget.dart';
 import 'package:projeto_estrutura/ui/helper/refresh_helper.dart';
-import 'package:projeto_estrutura/ui/page/player_page.dart';
 import 'package:provider/provider.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 
@@ -138,7 +138,7 @@ class _SearchPageState extends State<SearchPage> {
                                     Navigator.push(
                                       context,
                                       MaterialPageRoute(
-                                        builder: (_) => PlayPage(nowPlay: true),
+                                        builder: (_) => PlayPage(),
                                       ),
                                     );
                                   }

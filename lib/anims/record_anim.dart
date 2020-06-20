@@ -3,7 +3,7 @@ import 'package:flutter/animation.dart';
 import 'package:flutter/material.dart';
 import 'package:projeto_estrutura/config/resource_manager.dart';
 import 'package:projeto_estrutura/model/song_model.dart';
-import 'package:projeto_estrutura/ui/page/player_page.dart';
+import 'package:projeto_estrutura/ui/page/tab/music_page.dart';
 import 'package:provider/provider.dart';
 
 class RotateRecord extends AnimatedWidget {
@@ -19,9 +19,7 @@ class RotateRecord extends AnimatedWidget {
           Navigator.push(
             context,
             MaterialPageRoute(
-              builder: (_) => PlayPage(
-                nowPlay: false,
-              ),
+              builder: (_) => PlayPage(),
             ),
           );
         }

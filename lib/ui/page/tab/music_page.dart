@@ -1,154 +1,349 @@
-import 'dart:io';
+import 'dart:developer';
 
-import 'package:cached_network_image/cached_network_image.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:projeto_estrutura/generated/i18n.dart';
-import 'package:projeto_estrutura/model/download_model.dart';
-import 'package:projeto_estrutura/model/song_model.dart';
-import 'package:projeto_estrutura/ui/page/player_page.dart';
-import 'package:path_provider/path_provider.dart';
-import 'package:provider/provider.dart';
+import 'package:flutter/rendering.dart';
+import 'package:flutter/services.dart';
+import 'package:projeto_estrutura/ui/page/video_list.dart';
+import 'package:youtube_player_flutter/youtube_player_flutter.dart';
 
-class MusicPage extends StatefulWidget {
+class PlayPage extends StatefulWidget {
   @override
-  _MusicPageState createState() => _MusicPageState();
+  _PlayPageState createState() => _PlayPageState();
 }
 
-class _MusicPageState extends State<MusicPage>
-    with AutomaticKeepAliveClientMixin {
+class _PlayPageState extends State<PlayPage> {
+  final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey();
+  YoutubePlayerController _controller;
+  TextEditingController _idController;
+  TextEditingController _seekToController;
+
+  PlayerState _playerState;
+  YoutubeMetaData _videoMetaData;
+  double _volume = 100;
+  bool _muted = false;
+  bool _isPlayerReady = false;
+
+  final List<String> _ids = [
+    'nPt8bK2gbaU',
+    'gQDByCdjUXw',
+    'iLnmTe5Q2Qw',
+    '_WoCV4c6XOE',
+    'KmzdUe0RSJo',
+    '6jZDSSZZxjQ',
+    'p2lYr3vM_1w',
+    '7QUtEmBT_-w',
+    '34_PXCzGw1M',
+  ];
+
   @override
   void initState() {
-    loadData();
     super.initState();
+    _controller = YoutubePlayerController(
+      initialVideoId: _ids.first,
+      flags: const YoutubePlayerFlags(
+        mute: false,
+        autoPlay: true,
+        disableDragSeek: false,
+        loop: false,
+        isLive: false,
+        forceHD: false,
+        enableCaption: true,
+      ),
+    )..addListener(listener);
+    _idController = TextEditingController();
+    _seekToController = TextEditingController();
+    _videoMetaData = const YoutubeMetaData();
+    _playerState = PlayerState.unknown;
   }
 
-  loadData() async {
-    final dir = await getApplicationDocumentsDirectory();
-    List<FileSystemEntity> files = dir.listSync();
-    for (var file in files) {
-      print(file.path);
+  void listener() {
+    if (_isPlayerReady && mounted && !_controller.value.isFullScreen) {
+      setState(() {
+        _playerState = _controller.value.playerState;
+        _videoMetaData = _controller.metadata;
+      });
     }
-    setState(() {});
   }
 
   @override
-  bool get wantKeepAlive => true;
-  Widget _buildSongItem(Song data) {
-    DownloadModel downloadModel = Provider.of(context);
-    return Padding(
-      padding: const EdgeInsets.symmetric(vertical: 10.0, horizontal: 20.0),
-      child: Row(
-        children: <Widget>[
-          ClipRRect(
-            borderRadius: BorderRadius.circular(12.0),
-            child: Container(
-                width: 50,
-                height: 50,
-                child: Image(image: CachedNetworkImageProvider(data.pic))),
-          ),
-          SizedBox(
-            width: 20.0,
-          ),
+  void deactivate() {
+    // Pauses video while navigating to next page.
+    _controller.pause();
+    super.deactivate();
+  }
+
+  @override
+  void dispose() {
+    _controller.dispose();
+    _idController.dispose();
+    _seekToController.dispose();
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return YoutubePlayerBuilder(
+      onExitFullScreen: () {
+        // The player forces portraitUp after exiting fullscreen. This overrides the behaviour.
+        SystemChrome.setPreferredOrientations(DeviceOrientation.values);
+      },
+      player: YoutubePlayer(
+        controller: _controller,
+        showVideoProgressIndicator: true,
+        progressIndicatorColor: Colors.blueAccent,
+        topActions: <Widget>[
+          const SizedBox(width: 8.0),
           Expanded(
-            child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: <Widget>[
-                  Text(
-                    data.title,
-                    style: data.url == null
-                        ? TextStyle(
-                            fontSize: 12.0,
-                            fontWeight: FontWeight.w600,
-                            color: Color(0xFFE0E0E0),
-                          )
-                        : TextStyle(
-                            fontSize: 12.0,
-                            fontWeight: FontWeight.w600,
-                          ),
-                    maxLines: 1,
-                    overflow: TextOverflow.ellipsis,
-                  ),
-                  SizedBox(
-                    height: 10,
-                  ),
-                  Text(
-                    data.author,
-                    style: data.url == null
-                        ? TextStyle(
-                            fontSize: 10.0,
-                            color: Color(0xFFE0E0E0),
-                          )
-                        : TextStyle(
-                            fontSize: 10.0,
-                            color: Colors.grey,
-                          ),
-                    maxLines: 1,
-                    overflow: TextOverflow.ellipsis,
-                  ),
-                ]),
+            child: Text(
+              _controller.metadata.title,
+              style: const TextStyle(
+                color: Colors.white,
+                fontSize: 18.0,
+              ),
+              overflow: TextOverflow.ellipsis,
+              maxLines: 1,
+            ),
           ),
           IconButton(
-              onPressed: () => downloadModel.download(data),
-              icon: downloadModel.isDownload(data)
-                  ? Icon(
-                      Icons.cloud_done,
-                      color: Theme.of(context).accentColor,
-                      size: 20.0,
-                    )
-                  : Icon(
-                      Icons.cloud_download,
-                      size: 20.0,
-                    ))
+            icon: const Icon(
+              Icons.settings,
+              color: Colors.white,
+              size: 25.0,
+            ),
+            onPressed: () {
+              log('Settings Tapped!');
+            },
+          ),
+        ],
+        onReady: () {
+          _isPlayerReady = true;
+        },
+        onEnded: (data) {
+          _controller
+              .load(_ids[(_ids.indexOf(data.videoId) + 1) % _ids.length]);
+          _showSnackBar('Next Video Started!');
+        },
+      ),
+      builder: (context, player) => Scaffold(
+        key: _scaffoldKey,
+        body: ListView(
+          children: [
+            player,
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.stretch,
+                children: [
+                  _space,
+                  _text('Título', _videoMetaData.title),
+                  _space,
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: [
+                      IconButton(
+                        icon: const Icon(Icons.skip_previous),
+                        onPressed: _isPlayerReady
+                            ? () => _controller.load(_ids[
+                                (_ids.indexOf(_controller.metadata.videoId) -
+                                        1) %
+                                    _ids.length])
+                            : null,
+                      ),
+                      IconButton(
+                        icon: Icon(
+                          _controller.value.isPlaying
+                              ? Icons.pause
+                              : Icons.play_arrow,
+                        ),
+                        onPressed: _isPlayerReady
+                            ? () {
+                                _controller.value.isPlaying
+                                    ? _controller.pause()
+                                    : _controller.play();
+                                setState(() {});
+                              }
+                            : null,
+                      ),
+                      IconButton(
+                        icon: Icon(_muted ? Icons.volume_off : Icons.volume_up),
+                        onPressed: _isPlayerReady
+                            ? () {
+                                _muted
+                                    ? _controller.unMute()
+                                    : _controller.mute();
+                                setState(() {
+                                  _muted = !_muted;
+                                });
+                              }
+                            : null,
+                      ),
+                      FullScreenButton(
+                        controller: _controller,
+                        color: Colors.blueAccent,
+                      ),
+                      IconButton(
+                        icon: const Icon(Icons.skip_next),
+                        onPressed: _isPlayerReady
+                            ? () => _controller.load(_ids[
+                                (_ids.indexOf(_controller.metadata.videoId) +
+                                        1) %
+                                    _ids.length])
+                            : null,
+                      ),
+                    ],
+                  ),
+                  _space,
+                  Row(
+                    children: <Widget>[
+                      const Text(
+                        "Volume",
+                        style: TextStyle(fontWeight: FontWeight.w300),
+                      ),
+                      Expanded(
+                        child: Slider(
+                          inactiveColor: Colors.transparent,
+                          value: _volume,
+                          min: 0.0,
+                          max: 100.0,
+                          divisions: 10,
+                          label: '${(_volume).round()}',
+                          onChanged: _isPlayerReady
+                              ? (value) {
+                                  setState(() {
+                                    _volume = value;
+                                  });
+                                  _controller.setVolume(_volume.round());
+                                }
+                              : null,
+                        ),
+                      ),
+                    ],
+                  ),
+                  _space,
+                  AnimatedContainer(
+                    duration: const Duration(milliseconds: 800),
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(20.0),
+                      color: _getStateColor(_playerState),
+                    ),
+                    padding: const EdgeInsets.all(8.0),
+                    child: Text(
+                      _playerState.toString(),
+                      style: const TextStyle(
+                        fontWeight: FontWeight.w300,
+                        color: Colors.white,
+                      ),
+                      textAlign: TextAlign.center,
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+
+  Widget _text(String title, String value) {
+    return RichText(
+      text: TextSpan(
+        text: '$title : ',
+        style: const TextStyle(
+          color: Colors.blueAccent,
+          fontWeight: FontWeight.bold,
+        ),
+        children: [
+          TextSpan(
+            text: value ?? '',
+            style: const TextStyle(
+              color: Colors.blueAccent,
+              fontWeight: FontWeight.w300,
+            ),
+          ),
         ],
       ),
     );
   }
 
-  @override
-  Widget build(BuildContext context) {
-    super.build(context);
-    DownloadModel downloadModel = Provider.of(context);
-    return Scaffold(
-        body: SafeArea(
-            child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: <Widget>[
-          Padding(
-            padding: const EdgeInsets.all(20.0),
-            child: Text(S.of(context).tabMusic,
-                style: TextStyle(
-                    fontSize: 22.0,
-                    fontWeight: FontWeight.bold,
-                    letterSpacing: 1.2)),
+  Color _getStateColor(PlayerState state) {
+    switch (state) {
+      case PlayerState.unknown:
+        return Colors.grey[700];
+      case PlayerState.unStarted:
+        return Colors.pink;
+      case PlayerState.ended:
+        return Colors.red;
+      case PlayerState.playing:
+        return Colors.blueAccent;
+      case PlayerState.paused:
+        return Colors.orange;
+      case PlayerState.buffering:
+        return Colors.yellow;
+      case PlayerState.cued:
+        return Colors.blue[900];
+      default:
+        return Colors.blue;
+    }
+  }
+
+  Widget get _space => const SizedBox(height: 10);
+
+  Widget _loadCueButton(String action) {
+    return Expanded(
+      child: MaterialButton(
+        color: Colors.blueAccent,
+        onPressed: _isPlayerReady
+            ? () {
+                if (_idController.text.isNotEmpty) {
+                  var id = YoutubePlayer.convertUrlToId(
+                    _idController.text,
+                  );
+                  if (action == 'LOAD') _controller.load(id);
+                  if (action == 'CUE') _controller.cue(id);
+                  FocusScope.of(context).requestFocus(FocusNode());
+                } else {
+                  _showSnackBar('Source can\'t be empty!');
+                }
+              }
+            : null,
+        disabledColor: Colors.grey,
+        disabledTextColor: Colors.black,
+        child: Padding(
+          padding: const EdgeInsets.symmetric(vertical: 14.0),
+          child: Text(
+            action,
+            style: const TextStyle(
+              fontSize: 18.0,
+              color: Colors.white,
+              fontWeight: FontWeight.w300,
+            ),
+            textAlign: TextAlign.center,
           ),
-          Expanded(
-              child: downloadModel.downloadSong.length == 0
-                  ? Center(child: Text('none'))
-                  : ListView.builder(
-                      itemCount: downloadModel.downloadSong.length,
-                      itemBuilder: (BuildContext context, int index) {
-                        Song data = downloadModel.downloadSong[index];
-                        return GestureDetector(
-                          onTap: () {
-                            if (null != data.url) {
-                              SongModel songModel = Provider.of(context);
-                              songModel.setSongs(new List<Song>.from(
-                                  downloadModel.downloadSong));
-                              songModel.setCurrentIndex(index);
-                              Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                  builder: (_) => PlayPage(
-                                    nowPlay: true,
-                                  ),
-                                ),
-                              );
-                            }
-                          },
-                          child: _buildSongItem(data),
-                        );
-                      },
-                    ))
-        ])));
+        ),
+      ),
+    );
+  }
+
+  void _showSnackBar(String message) {
+    _scaffoldKey.currentState.showSnackBar(
+      SnackBar(
+        content: Text(
+          message,
+          textAlign: TextAlign.center,
+          style: const TextStyle(
+            fontWeight: FontWeight.w300,
+            fontSize: 16.0,
+          ),
+        ),
+        backgroundColor: Colors.blueAccent,
+        behavior: SnackBarBehavior.floating,
+        elevation: 1.0,
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(50.0),
+        ),
+      ),
+    );
   }
 }

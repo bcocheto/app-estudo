@@ -22,7 +22,7 @@ class _TabNavigatorState extends State<TabNavigator> {
 
   List<Widget> pages = <Widget>[
     HomePage(),
-    MusicPage(),
+    PlayPage(),
     MinePage(),
   ];
 
