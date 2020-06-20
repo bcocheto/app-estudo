@@ -66,7 +66,6 @@ class PlayerState extends State<Player> {
         _songData.setDuration(_duration);
       });
 
-      // TODO implemented for iOS, waiting for android impl
       if (Theme.of(context).platform == TargetPlatform.iOS) {
         // (Optional) listen for notification updates in the background
         _audioPlayer.startHeadlessService();

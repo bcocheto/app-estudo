@@ -12,7 +12,7 @@ class ViewStateModel with ChangeNotifier {
   ViewState _viewState;
 
   ViewStateModel({ViewState viewState})
-      : _viewState = viewState ?? ViewState.idle {}
+      : _viewState = viewState ?? ViewState.idle;
 
   ViewState get viewState => _viewState;
 

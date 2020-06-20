@@ -70,7 +70,6 @@ class SongModel with ChangeNotifier {
     notifyListeners();
   }
 
-  /// 在播放列表界面点击后立刻播放
   bool _playNow = false;
   bool get playNow => _playNow;
   setPlayNow(bool playNow) {
