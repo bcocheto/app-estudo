@@ -4,7 +4,7 @@ import 'package:projeto_estrutura/config/router_manager.dart';
 import 'package:projeto_estrutura/generated/i18n.dart';
 
 class SplashPage extends StatefulWidget {
-  static const String image = 'asset-1.png';
+  static const String image = 'DEVONLOGO-P.png';
 
   @override
   _SplashPageState createState() => _SplashPageState();
@@ -40,12 +40,8 @@ class _SplashPageState extends State<SplashPage> with TickerProviderStateMixin {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: <Widget>[
                 Text(
-                  'Aprenda',
+                  'Fala dev!',
                   style: TextStyle(fontSize: 25),
-                ),
-                Text(
-                  'a Programar',
-                  style: TextStyle(fontSize: 25, fontWeight: FontWeight.bold),
                 ),
                 SizedBox(height: 50),
                 Center(
