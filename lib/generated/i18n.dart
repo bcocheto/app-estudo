@@ -17,7 +17,7 @@ class S implements WidgetsLocalizations {
   @override
   TextDirection get textDirection => TextDirection.ltr;
 
-  String get Like => "Curtir";
+  String get like => "Curtir";
   String get about => "Sobre";
   String get actionCancel => "Cancelar";
   String get actionConfirm => "Confirmar";
@@ -35,7 +35,7 @@ class S implements WidgetsLocalizations {
   String get appUpdateReDownloadContent =>
       "Foi detectado que já foi baixado, baixar novamente?";
   String get appUpdateUpdate => "Atualizar Versão";
-  String get article_tag_top => "Top";
+  String get articleTagTop => "Top";
   String get autoBySystem => "Auto";
   String get clear => "Limpar";
   String get close => "Fechar";
@@ -78,9 +78,11 @@ class S implements WidgetsLocalizations {
   String get tabMusic => "Músicas";
   String get tabFavorite => "Favoritos";
   String get tabUser => "Perfil";
+  String get tabSettings => "Configurações";
   String get theme => "Tema";
   String get toSignIn => "Entrar";
   String get albums => "Categorias";
+  String get videos => "Videos";
   String get viewAll => "Ver Tudo";
   String get forYou => "Pra você";
   String get toSignUp => "Sign Up";
@@ -99,6 +101,7 @@ class S implements WidgetsLocalizations {
   String appUpdateFoundNewVersion(String version) => "Nova versão $version";
 }
 
+// ignore: camel_case_types
 class $pt_br extends S {
   const $pt_br();
 }

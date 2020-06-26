@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:projeto_estrutura/model/other_videos_model.dart';
 import 'package:projeto_estrutura/provider/view_state_list_model.dart';
 import 'package:projeto_estrutura/model/song_model.dart';
 import 'package:localstorage/localstorage.dart';
@@ -6,17 +7,17 @@ import 'package:localstorage/localstorage.dart';
 const String kLocalStorageSearch = 'kLocalStorageSearch';
 const String kFavoriteList = 'kFavoriteList';
 
-class FavoriteListModel extends ViewStateListModel<Song> {
+class FavoriteListModel extends ViewStateListModel<OtherVideos> {
   FavoriteModel favoriteModel;
 
   FavoriteListModel({this.favoriteModel});
   @override
-  Future<List<Song>> loadData() async {
+  Future<List<OtherVideos>> loadData() async {
     LocalStorage localStorage = LocalStorage(kLocalStorageSearch);
     await localStorage.ready;
-    List<Song> favoriteList =
-        (localStorage.getItem(kFavoriteList) ?? []).map<Song>((item) {
-      return Song.fromJsonMap(item);
+    List<OtherVideos> favoriteList =
+        (localStorage.getItem(kFavoriteList) ?? []).map<OtherVideos>((item) {
+      return OtherVideos.fromJsonMap(item);
     }).toList();
     favoriteModel.setFavorites(favoriteList);
     setIdle();
@@ -25,19 +26,19 @@ class FavoriteListModel extends ViewStateListModel<Song> {
 }
 
 class FavoriteModel with ChangeNotifier {
-  List<Song> _favoriteSong;
-  List<Song> get favoriteSong => _favoriteSong;
+  List<OtherVideos> _favoriteVideo;
+  List<OtherVideos> get favoriteVideos => _favoriteVideo;
 
-  setFavorites(List<Song> favoriteSong) {
-    _favoriteSong = favoriteSong;
+  setFavorites(List<OtherVideos> favoriteVideos) {
+    _favoriteVideo = favoriteVideos;
     notifyListeners();
   }
 
-  collect(Song song) {
-    if (_favoriteSong.contains(song)) {
-      _favoriteSong.remove(song);
+  collect(OtherVideos video) {
+    if (_favoriteVideo.contains(video)) {
+      _favoriteVideo.remove(video);
     } else {
-      _favoriteSong.add(song);
+      _favoriteVideo.add(video);
     }
     saveData();
     notifyListeners();
@@ -46,13 +47,13 @@ class FavoriteModel with ChangeNotifier {
   saveData() async {
     LocalStorage localStorage = LocalStorage(kLocalStorageSearch);
     await localStorage.ready;
-    localStorage.setItem(kFavoriteList, _favoriteSong);
+    localStorage.setItem(kFavoriteList, _favoriteVideo);
   }
 
-  isCollect(Song newSong) {
+  isCollect(OtherVideos newVideo) {
     bool isCollect = false;
-    for (int i = 0; i < _favoriteSong.length; i++) {
-      if (_favoriteSong[i].songid == newSong.songid) {
+    for (int i = 0; i < _favoriteVideo.length; i++) {
+      if (_favoriteVideo[i].id == newVideo.id) {
         isCollect = true;
         break;
       }

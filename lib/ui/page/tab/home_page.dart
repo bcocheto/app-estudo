@@ -63,94 +63,68 @@ class _HomePageState extends State<HomePage>
           FocusScope.of(context).requestFocus(FocusNode());
         },
         child: SafeArea(
-          child: ProviderWidget<HomeModel>(
-              onModelReady: (homeModel) async {
-                await homeModel.initData();
-              },
-              model: HomeModel(),
-              autoDispose: false,
-              builder: (context, homeModel, child) {
-                if (homeModel.busy) {
-                  return ViewStateBusyWidget();
-                } else if (homeModel.error && homeModel.list.isEmpty) {
-                  return ViewStateErrorWidget(
-                      error: homeModel.viewStateError,
-                      onPressed: homeModel.initData);
-                }
-                var albums = homeModel?.albums ?? [];
-                var forYou = homeModel?.forYou ?? [];
-                return Column(children: <Widget>[
-                  Padding(
-                    padding: const EdgeInsets.symmetric(vertical: 10.0),
-                    child: Row(
-                      children: <Widget>[
-                        Expanded(
-                          child: Container(
-                              margin: EdgeInsets.symmetric(horizontal: 20.0),
-                              decoration: BoxDecoration(
-                                color:
-                                    Theme.of(context).accentColor.withAlpha(50),
-                                borderRadius: BorderRadius.circular(30.0),
-                              ),
-                              child: TextField(
-                                style: TextStyle(
-                                  fontSize: 15.0,
-                                  color: Colors.grey,
-                                ),
-                                controller: _inputController,
-                                onChanged: (value) {},
-                                onSubmitted: (value) {
-                                  if (value.isNotEmpty == true) {
-                                    Navigator.push(
-                                      context,
-                                      MaterialPageRoute(
-                                        builder: (_) => SearchPage(
-                                          input: value,
-                                        ),
-                                      ),
-                                    );
-                                  }
-                                },
-                                decoration: InputDecoration(
-                                    border: InputBorder.none,
-                                    enabledBorder: InputBorder.none,
-                                    focusedBorder: InputBorder.none,
-                                    prefixIcon: Icon(
-                                      Icons.search,
-                                      color: Colors.grey,
-                                    ),
-                                    hintText: songModel.songs != null
-                                        ? songModel.currentSong.title
-                                        : S.of(context).searchSuggest),
-                              )),
-                        ),
-                        Padding(
-                          padding: const EdgeInsets.only(right: 20.0),
-                          child: RotateRecord(
-                              animation:
-                                  _commonTween.animate(controllerRecord)),
-                        ),
-                      ],
-                    ),
-                  ),
+          child: Column(children: <Widget>[
+            Padding(
+              padding: const EdgeInsets.symmetric(vertical: 10.0),
+              child: Row(
+                children: <Widget>[
                   Expanded(
-                    child: SmartRefresher(
-                      controller: homeModel.refreshController,
-                      onRefresh: () async {
-                        await homeModel.refresh();
-                        homeModel.showErrorMessage(context);
-                      },
-                      child: ListView(children: <Widget>[
-                        SizedBox(
-                          height: 10,
+                    child: Container(
+                        margin: EdgeInsets.symmetric(horizontal: 20.0),
+                        decoration: BoxDecoration(
+                          color: Theme.of(context).accentColor.withAlpha(50),
+                          borderRadius: BorderRadius.circular(30.0),
                         ),
-                        AlbumsCarousel(albums),
-                        ForYouCarousel(forYou),
-                      ]),
-                    ),
-                  )
-                ]);
-              }),
+                        child: TextField(
+                          style: TextStyle(
+                            fontSize: 15.0,
+                            color: Colors.grey,
+                          ),
+                          controller: _inputController,
+                          onChanged: (value) {},
+                          onSubmitted: (value) {
+                            if (value.isNotEmpty == true) {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (_) => SearchPage(
+                                    input: value,
+                                  ),
+                                ),
+                              );
+                            }
+                          },
+                          decoration: InputDecoration(
+                              border: InputBorder.none,
+                              enabledBorder: InputBorder.none,
+                              focusedBorder: InputBorder.none,
+                              prefixIcon: Icon(
+                                Icons.search,
+                                color: Colors.grey,
+                              ),
+                              hintText: songModel.songs != null
+                                  ? songModel.currentSong.title
+                                  : S.of(context).searchSuggest),
+                        )),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.only(right: 20.0),
+                    child: RotateRecord(
+                        animation: _commonTween.animate(controllerRecord)),
+                  ),
+                ],
+              ),
+            ),
+            Expanded(
+              child: ListView(children: <Widget>[
+                SizedBox(
+                  height: 10,
+                ),
+                AlbumsCarousel(),
+                ForYouCarousel(),
+              ]),
+            )
+          ]),
         ),
       ),
     );

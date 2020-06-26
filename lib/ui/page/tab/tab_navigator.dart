@@ -88,22 +88,22 @@ class _TabNavigatorState extends State<TabNavigator> {
                 style: TextStyle(color: Colors.white),
               ),
             ),
-            BubbleBottomBarItem(
-              backgroundColor: Theme.of(context).primaryColorDark,
-              icon: Icon(
-                Icons.video_library,
-                size: 25.0,
-              ),
-              activeIcon: Icon(
-                Icons.video_library,
-                size: 25.0,
-                color: Colors.white,
-              ),
-              title: Text(
-                S.of(context).tabMusic,
-                style: TextStyle(color: Colors.white),
-              ),
-            ),
+            // BubbleBottomBarItem(
+            //   backgroundColor: Theme.of(context).primaryColorDark,
+            //   icon: Icon(
+            //     Icons.video_library,
+            //     size: 25.0,
+            //   ),
+            //   activeIcon: Icon(
+            //     Icons.video_library,
+            //     size: 25.0,
+            //     color: Colors.white,
+            //   ),
+            //   title: Text(
+            //     S.of(context).tabMusic,
+            //     style: TextStyle(color: Colors.white),
+            //   ),
+            // ),
             BubbleBottomBarItem(
               backgroundColor: Theme.of(context).primaryColorDark,
               icon: Icon(
@@ -111,12 +111,12 @@ class _TabNavigatorState extends State<TabNavigator> {
                 size: 25.0,
               ),
               activeIcon: Icon(
-                Icons.person,
+                Icons.settings,
                 size: 25.0,
                 color: Colors.white,
               ),
               title: Text(
-                S.of(context).tabUser,
+                S.of(context).tabSettings,
                 style: TextStyle(color: Colors.white),
               ),
             ),

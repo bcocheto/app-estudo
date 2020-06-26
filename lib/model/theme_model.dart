@@ -58,8 +58,8 @@ class ThemeModel with ChangeNotifier {
     Brightness brightness = isDark ? Brightness.dark : Brightness.light;
 
     var themeColor = _themeColor;
-    var accentColor = isDark ? themeColor[800] : _themeColor;
-    var scaffoldBackgroundColor = isDark ? Color(0xFF373331) : Colors.white;
+    var accentColor = isDark ? themeColor[700] : _themeColor;
+    var scaffoldBackgroundColor = isDark ? Color(0xF5533ff) : Colors.white;
     var themeData = ThemeData(
         brightness: brightness,
         primaryColorBrightness: Brightness.dark,

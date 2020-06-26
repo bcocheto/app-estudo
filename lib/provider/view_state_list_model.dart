@@ -7,8 +7,8 @@ abstract class ViewStateListModel<T> extends ViewStateModel {
 
   /// 第一次进入页面loading skeleton
   initData() async {
-    setBusy();
-    await refresh(init: true);
+    // setBusy();
+    // await refresh(init: true);
   }
 
   // 下拉刷新

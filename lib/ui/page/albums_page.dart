@@ -92,7 +92,7 @@ class _AlbumsPageState extends State<AlbumsPage> {
                     ),
                   ],
                 ),
-                AlbumCarousel(input: widget.data.author),
+                // AlbumCarousel(input: widget.data.author),
               ],
             ),
           ),
