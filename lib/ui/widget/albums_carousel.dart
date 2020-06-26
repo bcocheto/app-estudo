@@ -28,7 +28,7 @@ class _AlbumsCarouselState extends State<AlbumsCarousel> {
       //perform your action when video playing is done
     });
     FlutterYoutube.playYoutubeVideoById(
-      apiKey: "AIzaSyCV_HeEFUqcliDFX0eSs7K-Y7E6UgIEIv0",
+      apiKey: "AIzaSyDbkOUcWRUVv2Fy1-6IDunMXrYLNchcTeY",
       videoId: textEditingControllerId.text,
     );
   }
